@@ -5,9 +5,13 @@
       <sourceFolder url="file://$MODULE_DIR$/02-guessing-game/guessing_game/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/03-common-programming-concepts/variables/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/2-guessing_game/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/03-common-programming-concepts/data_types/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/03-common-programming-concepts/functions/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/2-guessing_game/target" />
       <excludeFolder url="file://$MODULE_DIR$/02-guessing-game/guessing_game/target" />
       <excludeFolder url="file://$MODULE_DIR$/03-common-programming-concepts/variables/target" />
+      <excludeFolder url="file://$MODULE_DIR$/03-common-programming-concepts/data_types/target" />
+      <excludeFolder url="file://$MODULE_DIR$/03-common-programming-concepts/functions/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
