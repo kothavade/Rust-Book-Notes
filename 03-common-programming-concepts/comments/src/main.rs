@@ -7,6 +7,4 @@ fn main() {
 
     // but this is more common
     let num2 = 8;
-
-
 }

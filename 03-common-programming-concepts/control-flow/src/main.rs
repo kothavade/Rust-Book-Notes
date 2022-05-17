@@ -64,4 +64,10 @@ fn main() {
     for element in array {
         println!("the value is {}", element);
     }
+
+    // iterate through a range
+    for number in (1..4).rev() {
+        println!("{}!", number);
+    }
+    println!("LIFTOFF!");
 }
