@@ -1,0 +1,33 @@
+#+title: What is Ownership?
+#+author: Ved Kothavade
+#+email: kothavade.ved@gmail.com
+#+date: <2022-05-28 Sat>
+
+* What is Ownership?
+Ownership is how memory is managed in Rust, instead of a garbage collector. It checks at compile time, and so can keep code save without overhead at run time.
+
+* The Stack and the Heap
+** Stack:
+- LIFO: Last in, first out
+- Adding to the top: Pushing to the stack
+- Removing from the top: Popping off the stack
+- All data in the stack has a known, fixed size
+  - This means it is used to store data that has a known size at compile time.
+** Heap:
+- When data is put, memory is requested from the memory allocator
+
+* Ownership Rules
+
+* Variable Scope
+#+BEGIN_SRC rust
+let s = "hello";
+println!("{}", s);
+{
+    let s = "hello world";
+    println!("{}", s);
+}
+#+END_SRC
+
+#+RESULTS:
+: hello
+: hello world
