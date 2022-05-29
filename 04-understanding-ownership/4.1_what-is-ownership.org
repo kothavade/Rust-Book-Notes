@@ -7,20 +7,22 @@
 Ownership is how memory is managed in Rust, instead of a garbage collector. It checks at compile time, and so can keep code save without overhead at run time.
 
 * The Stack and the Heap
-** Stack:
+** The Stack
 - LIFO: Last in, first out
+  - Like a stack of plates: you add to the top, and remove from the top as well
 - Adding to the top: Pushing to the stack
 - Removing from the top: Popping off the stack
 - All data in the stack has a known, fixed size
   - This means it is used to store data that has a known size at compile time.
-** Heap:
+** The Heap
 - When data is put, memory is requested from the memory allocator
+- to
 
 * Ownership Rules
 
 * Variable Scope
-#+BEGIN_SRC rust
-let s = "hello";
+#+BEGIN_SRC rustic
+let s = "hello rust";
 println!("{}", s);
 {
     let s = "hello world";
@@ -29,5 +31,5 @@ println!("{}", s);
 #+END_SRC
 
 #+RESULTS:
-: hello
+: hello rust
 : hello world
