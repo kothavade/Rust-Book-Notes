@@ -1,35 +1,83 @@
 #+title: 4.1: What is Ownership?
 #+author: Ved Kothavade
 #+email: kothavade.ved@gmail.com
-#+date: <2022-05-28 Sat>
+#+date: <2022-06-16 Thu>
 
 * What is Ownership?
 Ownership is how memory is managed in Rust, instead of a garbage collector. It checks at compile time, and so can keep code save without overhead at run time.
 
 * The Stack and the Heap
 ** The Stack
-- LIFO: Last in, first out
-  - Like a stack of plates: you add to the top, and remove from the top as well
-- Adding to the top: Pushing to the stack
-- Removing from the top: Popping off the stack
-- All data in the stack has a known, fixed size
-  - This means it is used to store data that has a known size at compile time.
++ LIFO: Last in, first out
+  + Like a stack of plates: you add to the top, and remove from the top as well
++ Adding to the top: Pushing to the stack
++ Removing from the top: Popping off the stack
++ All data in the stack has a known, fixed s ize
+  + This means it is used to store data that has a known size at compile time.
 ** The Heap
-- When data is put, memory is requested from the memory allocator
-- to
++ Adding: Allocating (on the heap)
++ Data put on the heap returns a pointer
++ These pointers can be stored on the stack, but the data itself must be found on the heap by following the pointer
++ Managing what data is in the heap is the problem ownership solves
+** Similarities/Differences
++ Adding to stack is faster than allocating to the heap
+  + Having to follow a pointer adds complexity versus just adding to the top of the stack
 
 * Ownership Rules
+1. Each value in Rust has an /owner/
+2. There can only be one owner at any given time
+3. When the owner goes out of scope, the value is dropped
 
 * Variable Scope
-#+BEGIN_SRC rustic
+#+begin_src rust
 let s = "hello rust";
-println!("{}", s);
-{
-    let s = "hello world";
-    println!("{}", s);
-}
-#+END_SRC
+#+end_src
+~s~ is valid from declaration to the end of the current /scope/.
+
+#+begin_src rust
+// not valid
+{ // not valid
+    let s = "hello rust"; //valid
+}  // not valid
+#+end_src
+~s~ is valid from the point it is declared to the end of the scope.
+
+* The ~String~ Type
++ Previously discussed data types such as ~i8~, ~u32~, etc have a fixed size, so they can be stored on the stack
++ ~String~ types do not have a fixed value, so they must be stored on the heap instead
+  + These are different from string literals, which are immutable
+#+begin_src rust
+let s = String::from("hello");
+#+end_src
+A ~String~ can be made from a string literal using the ~from~ command.
+
+#+begin_src rust
+let mut s = String::from("hello");
+s.push_str(", world");
+println!("", s);
+#+end_src
 
 #+RESULTS:
-: hello rust
-: hello world
+: hello, world
+
+A mutable ~String~ can also be created from a string literal, using the same method. Because it is mutable, it can be changed with, for example, ~push_str~.
+
+* Memory and Allocation
++ The size of a string literal is known at compile time, so it can be stored in the stack
++ For a ~String~, memory must be requested from the allocator at runtime
+  + This means that once the ~String~ is no longer needed, there needs to be a way to discard the memory it held
++ ~String::from~ requests the memory from the allocator
++ The memory is returned once the ~String~ goes out of scope
+  + Behind the scenes, the function ~drop~ is called to do so
+** Ways Variables and Data Interact: Move
+#+begin_src rust
+let x = 5;
+let y = x;
+#+end_src
+The value of =5= is bound to ~x~, and then the value of ~x~ is bound to ~y~.
+
+#+begin_src rust
+let string1 = String::from("hello");
+let string2 = string1;
+#+end_src
+Here,
