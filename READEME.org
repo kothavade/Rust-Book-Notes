@@ -1,0 +1,5 @@
+#+title: Rust Book Notes
+#+author: Ved Kothavade
+#+email: kothavade.ved@gmail.com
+
+These are my notes as I read the [[https://doc.rust-lang.org/book][Rust Book]].
