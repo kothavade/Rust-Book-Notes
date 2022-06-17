@@ -89,3 +89,38 @@ The value of ~string1~ cannot simply be copied and bound to ~string2~, because a
 + Strings have 3 parts, a =pointer=, a =length=, and a =capacity=
 + The pointer leads to the heap memory that holds the string
 + These values are held in the stack
+
+ [[attachment:_20220617_191157trpl04-02.svg]]
++ Data is copied to the new ~String~ by copying the three parts
++ The actual heap data is not copied, as it would be expensive
+
+#+begin_src rust
+let s1 = String::from("hello");
+let s2 = s1;
+
+println!("{}, world!", s1);
+#+end_src
+
+#+RESULTS:
+: error: Could not compile `cargoO1ctSt`.
++ This code results in a "borrow of moved value" error because s1 goes out of scope once it's data is copied to s2
++ This is a =move=, unlike a =shallow copy= which would keep the old variable
+** Ways Variables and Data Interact: Clone
+#+begin_src rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+
+println!("s1 = {}, s2 = {}", s1, s2);
+#+end_src
++ If you actually want to =deep copy= in Rust, you use the ~clone~ function
++ This copies the heap data as well
+** Stack-Only Data: Copy
+#+begin_src rust
+let x = 5;
+let y = x;
+
+println!("x = {}, y = {}", x, y);
+#+end_src
++ In this case, the value is actually being copied without ~clone~
++ Because the size of an integer is known at compile-time, there is little performance loss from copying
++ You cannot =Copy=
