@@ -69,7 +69,10 @@ A mutable ~String~ can also be created from a string literal, using the same met
 + ~String::from~ requests the memory from the allocator
 + The memory is returned once the ~String~ goes out of scope
   + Behind the scenes, the function ~drop~ is called to do so
-** Ways Variables and Data Interact: Move
+** Ways Variables and Data Interact: Move :ATTACH:
+:PROPERTIES:
+:ID:       7b77867a-c5d8-4bb8-8e17-f8b669181f77
+:END:
 #+begin_src rust
 let x = 5;
 let y = x;
@@ -80,4 +83,9 @@ The value of =5= is bound to ~x~, and then the value of ~x~ is bound to ~y~.
 let string1 = String::from("hello");
 let string2 = string1;
 #+end_src
-Here,
+The value of ~string1~ cannot simply be copied and bound to ~string2~, because a ~String~ has multiple parts.
+
+[[attachment:_20220617_162301trpl04-01.svg]]
++ Strings have 3 parts, a =pointer=, a =length=, and a =capacity=
++ The pointer leads to the heap memory that holds the string
++ These values are held in the stack
