@@ -4,4 +4,4 @@
 
 These are my notes as I read the [[https://doc.rust-lang.org/book][Rust Book]].
 
-I am using [[https://orgmode.org][Org Mode]] to write code and take notes within the same file.
+I am using [[https://orgmode.org][Org Mode]] with the great [[https://github.com/brotzeit/rustic][Rustic Package]] to write code and take notes within the same file.
