@@ -5,35 +5,25 @@
 
 * What is Ownership?
 Ownership is how memory is managed in Rust, instead of a garbage collector. It checks at compile time, and so can keep code save without overhead at run time.
-
 * The Stack and the Heap
 ** The Stack
 + LIFO: Last in, first out
-  + Like a stack of plates: you add to the top, and remove from the top as well
 + Adding to the top: Pushing to the stack
 + Removing from the top: Popping off the stack
-+ All data in the stack has a known, fixed s ize
++ All data in the stack has a known, fixed size
   + This means it is used to store data that has a known size at compile time.
 ** The Heap
 + Adding: Allocating (on the heap)
 + Data put on the heap returns a pointer
-+ These pointers can be stored on the stack, but the data itself must be found on the heap by following the pointer
-+ Managing what data is in the heap is the problem ownership solves
++ Pointers are stored on the stack
 ** Similarities/Differences
 + Adding to stack is faster than allocating to the heap
-  + Having to follow a pointer adds complexity versus just adding to the top of the stack
-
++ Pointers at complexity
 * Ownership Rules
 1. Each value in Rust has an /owner/
 2. There can only be one owner at any given time
 3. When the owner goes out of scope, the value is dropped
-
 * Variable Scope
-#+begin_src rust
-let s = "hello rust";
-#+end_src
-~s~ is valid from declaration to the end of the current /scope/.
-
 #+begin_src rust
 // not valid
 { // not valid
@@ -41,11 +31,9 @@ let s = "hello rust";
 }  // not valid
 #+end_src
 ~s~ is valid from the point it is declared to the end of the scope.
-
 * The ~String~ Type
-+ Previously discussed data types such as ~i8~, ~u32~, etc have a fixed size, so they can be stored on the stack
-+ ~String~ types do not have a fixed value, so they must be stored on the heap instead
-  + These are different from string literals, which are immutable
++ ~String~ types do not have a fixed value, so they must be stored on the heap
++ This is unlike string literals, which are immutable
 #+begin_src rust
 let s = String::from("hello");
 #+end_src
@@ -59,16 +47,13 @@ println!("", s);
 
 #+RESULTS:
 : hello, world
-
-A mutable ~String~ can also be created from a string literal, using the same method. Because it is mutable, it can be changed with, for example, ~push_str~.
-
++ Mutable ~String~ can be created from a string literal
++ ~push_str~ appends to a ~String~
 * Memory and Allocation
-+ The size of a string literal is known at compile time, so it can be stored in the stack
-+ For a ~String~, memory must be requested from the allocator at runtime
-  + This means that once the ~String~ is no longer needed, there needs to be a way to discard the memory it held
++ String literals are stored on the stack because their value is known at compile-time
++ For ~String~ types, memory must be requested from the allocator at runtime
 + ~String::from~ requests the memory from the allocator
-+ The memory is returned once the ~String~ goes out of scope
-  + Behind the scenes, the function ~drop~ is called to do so
++ The memory is returned once the ~String~ goes out of scope using ~drop~
 ** Ways Variables and Data Interact: Move :ATTACH:
 :PROPERTIES:
 :ID:       7b77867a-c5d8-4bb8-8e17-f8b669181f77
@@ -77,50 +62,64 @@ A mutable ~String~ can also be created from a string literal, using the same met
 let x = 5;
 let y = x;
 #+end_src
-The value of =5= is bound to ~x~, and then the value of ~x~ is bound to ~y~.
++ =5= is bound to ~x~, and then the value of ~x~ is bound to ~y~
 
 #+begin_src rust
 let string1 = String::from("hello");
 let string2 = string1;
 #+end_src
-The value of ~string1~ cannot simply be copied and bound to ~string2~, because a ~String~ has multiple parts.
++ ~string1~ cannot be copied and bound to ~string2~
 
 [[attachment:_20220617_162301trpl04-01.svg]]
-+ Strings have 3 parts, a =pointer=, a =length=, and a =capacity=
-+ The pointer leads to the heap memory that holds the string
-+ These values are held in the stack
++ ~String~ types have 3 parts, a pointer, a length, and a capacity
++ These values are stored in the stack
 
- [[attachment:_20220617_191157trpl04-02.svg]]
+[[attachment:_20220617_191157trpl04-02.svg]]
 + Data is copied to the new ~String~ by copying the three parts
 + The actual heap data is not copied, as it would be expensive
 
 #+begin_src rust
 let s1 = String::from("hello");
 let s2 = s1;
-
 println!("{}, world!", s1);
 #+end_src
 
 #+RESULTS:
 : error: Could not compile `cargoO1ctSt`.
-+ This code results in a "borrow of moved value" error because s1 goes out of scope once it's data is copied to s2
-+ This is a =move=, unlike a =shallow copy= which would keep the old variable
++ This doesn't compile because ~s1~ goes out of scope once it is copied to ~s2~
++ This is a =move=
 ** Ways Variables and Data Interact: Clone
 #+begin_src rust
 let s1 = String::from("hello");
 let s2 = s1.clone();
-
 println!("s1 = {}, s2 = {}", s1, s2);
 #+end_src
-+ If you actually want to =deep copy= in Rust, you use the ~clone~ function
-+ This copies the heap data as well
+
+#+RESULTS:
+: s1 = hello, s2 = hello
+
++ To =deep copy= in Rust, the ~clone~ function is used
+  + This creates a copy in the heap
 ** Stack-Only Data: Copy
 #+begin_src rust
 let x = 5;
 let y = x;
-
 println!("x = {}, y = {}", x, y);
 #+end_src
-+ In this case, the value is actually being copied without ~clone~
-+ Because the size of an integer is known at compile-time, there is little performance loss from copying
-+ You cannot =Copy=
+
+#+RESULTS:
+: x = 5, y = 5
+
++ The value of ~x~ is being copied to ~y~ without using ~clone~
++ Unlike ~String~ types, there is little performance loss copying integers
+  + Integers are stored entirely on the stack
++ The =Copy= trait is used to create variables that aren't invalidated after being copied
+  + The =Drop= trait cannot be used along with =Copy=
+  + Types that implement =Copy=:
+    1. Integer types (=u32=)
+    2. Boolean (=bool=)
+    3. Floating point types (=f32=)
+    4. Character (=char=)
+    5. Tuple types (=(i32, i32)=)
+       + All types contained in the tuple must implement =Copy=
+* Ownership and Functions
