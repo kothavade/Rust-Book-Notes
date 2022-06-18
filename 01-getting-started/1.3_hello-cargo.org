@@ -1,0 +1,36 @@
+#+title: 1.3: Hello, Cargo!
+Check cargo version:
+#+begin_src shell
+cargo --version
+#+end_src
+* Creating a Project with Cargo
+Create a project called "hello_cargo":
+#+begin_src shell
+cargo new hello_cargo
+cd hello_cargo
+#+end_src
++ By default, git VCS is enabled
+Create a project without VCS:
+#+begin_src shell
+cargo new --vcs=none <project name>
+#+end_src
+* Building and Running a Cargo Project
+Build, and then run:
+#+begin_src shell
+cargo build
+./target/debug/<project name>
+#+end_src
+Build and run in one step:
+#+begin_src shell
+cargo run
+#+end_src
+Check code without compiling:
+#+begin_src shell
+cargo check
+#+end_src
+* Building for Release
+#+begin_src shell
+cargo build --release
+#+end_src
+* Cargo as Convention
++ Cargo is best with large projects using multiple crates

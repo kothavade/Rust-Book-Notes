@@ -1,0 +1,17 @@
+#+title: 2.1 Programming a Guessing Game
+* Setting Up a New Project
+Setup:
+#+begin_src shell
+cargo new guessing_game
+cd guessing_game
+#+end_src
+Test:
+#+begin_src shell
+cargo run
+#+end_src
+* Processing a Guessing
+#+name: import
+#+begin_src rust
+use std::io;
+#+end_src
+Import ~std::io~:

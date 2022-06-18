@@ -1,0 +1,44 @@
+#+title: 1.2: Hello, World!
+* Create a Project Directory
+** Linux, macOS
+#+begin_src shell
+mkdir ~/projects
+cd ~/projects
+mkdir hello_world
+cd hello_world
+#+end_src
+** Windows
+#+begin_src shell
+mkdir "%USERPROFILE%\projects"
+cd /d "%USERPROFILE%\projects"
+mkdir hello_world
+cd hello_world
+#+end_src
+* Writing and Running a Rust Program
+Example Rust program:
+#+begin_src rust
+fn main() {
+    println!("Hello, world!");
+}
+#+end_src
+
+#+RESULTS:
+: Hello, world!
+
+Compile/run the program:
+#+begin_src shell
+rustc main.rs
+./main
+#+end_src
+* Anatomy of a Rust Program
++ ~main~ is the entry point of a Rust program
++ Parameters go inside the parenthesis of a function
++ ~rustfmt~ formats a code file
+  + 4 spaces, not tabs
++ ~println!~ is a macro
+  + ~!~ indicates a macro
++ Lines must end with a semicolon
+* Compiling and Running Are Separate Steps
++ Compile with ~rustc <filename.rs>~
++ Run the created binary executable
+  + See "Writing and Running a Rust Program"

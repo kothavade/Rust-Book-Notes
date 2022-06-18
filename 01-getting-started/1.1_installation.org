@@ -1,0 +1,27 @@
+#+title: 1.1: Installation
+* Linux
+#+begin_src shell
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+#+end_src
++ Install =GCC= or =Clang= from package manager
+* macOS
+#+begin_src shell
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+xcode-select --install
+#+end_src
+* Windows
++ Use the [[https://www.rust-lang.org/tools/install][Rust Install Instructions]]
+* Updating
+#+begin_src shell
+rustup update
+#+end_src
+* Troubleshooting
+#+begin_src
+rustc --version
+#+end_src
++ Use to check if Rust is in PATH
++ Ask on Rust Discord
+* Local Documentation
+#+begin_src shell
+rustup doc
+#+end_src

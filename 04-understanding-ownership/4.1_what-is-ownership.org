@@ -1,8 +1,4 @@
 #+title: 4.1: What is Ownership?
-#+author: Ved Kothavade
-#+email: kothavade.ved@gmail.com
-#+date: <2022-06-16 Thu>
-
 * What is Ownership?
 Ownership is how memory is managed in Rust, instead of a garbage collector. It checks at compile time, and so can keep code save without overhead at run time.
 * The Stack and the Heap
@@ -116,10 +112,10 @@ println!("x = {}, y = {}", x, y);
 + The =Copy= trait is used to create variables that aren't invalidated after being copied
   + The =Drop= trait cannot be used along with =Copy=
   + Types that implement =Copy=:
-    1. Integer types (=u32=)
-    2. Boolean (=bool=)
-    3. Floating point types (=f32=)
-    4. Character (=char=)
-    5. Tuple types (=(i32, i32)=)
+    1. Integer types e.g. =u32=
+    2. Booleans e.g. =bool=
+    3. Floating point types e.g. =f32=
+    4. Character e.g. =char=
+    5. Tuple types e.g. =(i32, i32)=
        + All types contained in the tuple must implement =Copy=
 * Ownership and Functions
