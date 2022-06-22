@@ -35,7 +35,7 @@ let s = String::from("hello");
 #+end_src
 A ~String~ can be made from a string literal using the ~from~ command.
 
-#+begin_src rust
+#+begin_src rust :exports both
 let mut s = String::from("hello");
 s.push_str(", world");
 println!("", s);
@@ -74,7 +74,7 @@ let string2 = string1;
 + Data is copied to the new ~String~ by copying the three parts
 + The actual heap data is not copied, as it would be expensive
 
-#+begin_src rust
+#+begin_src rust :exports both
 let s1 = String::from("hello");
 let s2 = s1;
 println!("{}, world!", s1);
@@ -85,7 +85,7 @@ println!("{}, world!", s1);
 + This doesn't compile because ~s1~ goes out of scope once it is copied to ~s2~
 + This is a =move=
 ** Ways Variables and Data Interact: Clone
-#+begin_src rust
+#+begin_src rust :exports both
 let s1 = String::from("hello");
 let s2 = s1.clone();
 println!("s1 = {}, s2 = {}", s1, s2);
@@ -97,7 +97,7 @@ println!("s1 = {}, s2 = {}", s1, s2);
 + To =deep copy= in Rust, the ~clone~ function is used
   + This creates a copy in the heap
 ** Stack-Only Data: Copy
-#+begin_src rust
+#+begin_src rust :exports both
 let x = 5;
 let y = x;
 println!("x = {}, y = {}", x, y);

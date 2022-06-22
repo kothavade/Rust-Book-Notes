@@ -40,7 +40,7 @@ io::stdin()
 println!("You guessed: {}", guess);
 #+end_src
 + ~{}~ can be used to insert variables into a ~println!~ by passing the variables as additional parameters
-#+begin_src rust
+#+begin_src rust :exports both
 let x = 5;
 let y = 10;
 println!("x = {} and y = {}", x, y);
