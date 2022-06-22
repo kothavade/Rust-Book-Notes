@@ -78,7 +78,7 @@ cargo update
 #+end_src
 + ~cargo update~ updates dependencies and changes =Cargo.lock= to reflect that
 ** Generating a Random Number
-#+begin_src rust :crates '(rand)
+#+begin_src rust :crates '(rand) :exports both
 use rand::Rng;
 let secret_number = rand::thread_rng().gen_range(1..101);
 println!("The secret number is {}", secret_number);
