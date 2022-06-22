@@ -89,4 +89,29 @@ println!("The secret number is {}", secret_number);
 
 + =Rng= is a trait of =rand= that defines methods that are implemented
 + ~use~ adds methods to scope
-+
++ ~thread_rng()~ is a function that generates random numbers based on the thread an an OS seed
++ ~.gen_range()~ is a method that takes a range argument
+  + Ranges are defined with a =start_num..end_num= format
+  + Inclusive ranges can be written with =start_num..=end_num=
+* Comparing the Guess to the Secret Number
+#+begin_src rust
+use std::cmp::Ordering;
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
+match guess.cmp(&secret_number) {
+    Ordering::Less => println!("Too small!"),
+    Ordering::Greater => println!("Too big!"),
+    Ordering::Equal => println!("You win!"),
+}
+#+end_src
++ =Ordering= is an /enum/ which returns =Less=, =Greater=, or =Equal=
++ ~cmp~ is a method which compares the value it is called on and the argument passed, and returns a /variant/ of =Ordering=.
++ ~match~ is an expression with many /arms/, each containing a /pattern/
+  + The input value is compared against each pattern until a match is found
+  + Matches are done in the order they are listed
++ ~match~ requires the same type
++ Converting a =String= to a =u32= (or other integer):
+  + ~.trim()~ removes whitespace and newlines
+  + ~.parse()~ parses a =String= into a number
+    + What type of number must be manually set with an annotation
+    + It returns a =Result=, so the =Err= can be caught with an ~.expect()~
+* Allowing
