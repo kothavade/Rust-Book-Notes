@@ -5,3 +5,6 @@
 These are my notes as I read the [[https://doc.rust-lang.org/book][Rust Book]].
 
 I am using [[https://orgmode.org][Org Mode]] with [[https://github.com/brotzeit/rustic][Rustic]] to write code and take notes within the same file. If needed, an accompanying Cargo Project is named to match an Org file.
+
+#html:
+<p align="center"><img src="https://nostarch.com/sites/default/files/styles/uc_product_full/public/Rust2018_front.png?itok=CaXl5mVJ" /></p>
