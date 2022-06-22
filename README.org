@@ -4,4 +4,4 @@
 
 These are my notes as I read the [[https://doc.rust-lang.org/book][Rust Book]].
 
-I am using [[https://orgmode.org][Org Mode]] with [[https://github.com/brotzeit/rustic][Rustic]] to write code and take notes within the same file. If needed, an accompanying Cargo Project is named to match an Org file.
+I am using [[https://orgmode.org][Org Mode]] in Emacs with [[https://github.com/brotzeit/rustic][Rustic]] to write code and take notes within the same file.
