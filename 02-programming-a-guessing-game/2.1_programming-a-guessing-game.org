@@ -1,17 +1,92 @@
-#+title: 2.1 Programming a Guessing Game
+#+title: 2.1: Programming a Guessing Game
 * Setting Up a New Project
-Setup:
 #+begin_src shell
 cargo new guessing_game
-cd guessing_game
 #+end_src
-Test:
-#+begin_src shell
-cargo run
-#+end_src
-* Processing a Guessing
-#+name: import
+* Processing a Guess
 #+begin_src rust
 use std::io;
 #+end_src
-Import ~std::io~:
++ The ~std::io~ library is used to access user input
+#+begin_src rust
+println!("Guess the number!");
+println!("Please input your guess.");
+#+end_src
++ ~println!~ is a macro used to print to =stdout=
+** Storing Values with Variables
+#+begin_src rust
+let mut guess = String::new();
+#+end_src
++ ~let~ creates a variable
++ ~mut~ indicates that a variable is /mutable/
+  + By default, variables are /immutable/
++ ~::~ indicates an /associated function/
+** Receiving User Input
+#+begin_src rust
+io::stdin()
+    .read_line(&mut guess)
+#+end_src
++ ~io::stdin()~ returns an instance of ~std::io::Stdin~
++ ~.read_line()~ gets input from user
++ ~&mut guess~ is a /reference/ to the =guess= variable, which allows ~.read_line()~ to append the user input to a =String=
+** Handling Potential Failure with the =Result= Type
+#+begin_src rust
+    .expect("Failed to read line");
+#+end_src
++ ~.read_line()~ returns a =Result=, which is an /enum/ with the /variants/ =Ok= and =Err=
++ ~.expect()~ is a method of =Result=, which crashes and prints the argument passed
+** Printing Values with ~println!~ Placeholder
+#+begin_src rust
+println!("You guessed: {}", guess);
+#+end_src
++ ~{}~ can be used to insert variables into a ~println!~ by passing the variables as additional parameters
+#+begin_src rust
+let x = 5;
+let y = 10;
+println!("x = {} and y = {}", x, y);
+#+end_src
+
+#+RESULTS:
+: x = 5 and y = 10
++ Multiple variables can be inserted by using multiple ~{}~ pairs and passing the corresponding variables in order
+** Testing the First Part
+#+begin_src shell
+cargo run
+#+end_src
+* Generating a Secret Number
+** Using a Crate to Get More Functionality
++ A /crate/ is a collection of Rust source files
++ /Binary crates/ are executables
++ /Library crates/ are meant to be used in other programs, but do not run independently
+#+begin_src
+rand = "0.8.3"
+#+end_src
++ Crates can be added to the =Cargo.toml= file in the =[dependencies]= section
++ Crate versions are specified with /Semantic Versioning/
+  + A number, such as =0.8.3=, is read as =^0.8.3=, which means any version between =0.8.3= and =0.9.0=
++ The =rand= crate can be used to generate random numbers
+#+begin_src shell
+cargo build
+#+end_src
++ Running ~cargo build~ after adding crates builds them from source, allowing them to be used
+*** Ensuring Reproducible Builds with the =Cargo.lock= File
++ A =Cargo.lock= file is created when dependencies are added
++ It locks the versions of all dependencies so updates don't affect builds unless they are manually done
+*** Updating a Crate to Get a New Version
+#+begin_src shell
+cargo update
+#+end_src
++ ~cargo update~ updates dependencies and changes =Cargo.lock= to reflect that
+** Generating a Random Number
+#+begin_src rust :crates '(rand)
+use rand::Rng;
+let secret_number = rand::thread_rng().gen_range(1..101);
+println!("The secret number is {}", secret_number);
+#+end_src
+
+#+RESULTS:
+: The secret number is 8
+
++ =Rng= is a trait of =rand= that defines methods that are implemented
++ ~use~ adds methods to scope
++

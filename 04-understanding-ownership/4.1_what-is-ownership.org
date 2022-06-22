@@ -117,5 +117,5 @@ println!("x = {}, y = {}", x, y);
     3. Floating point types e.g. =f32=
     4. Character e.g. =char=
     5. Tuple types e.g. =(i32, i32)=
-       + All types contained in the tuple must implement =Copy=
+       + All types contained in the tuple must implement =Copy= misspel
 * Ownership and Functions
