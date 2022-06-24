@@ -114,4 +114,43 @@ match guess.cmp(&secret_number) {
   + ~.parse()~ parses a =String= into a number
     + What type of number must be manually set with an annotation
     + It returns a =Result=, so the =Err= can be caught with an ~.expect()~
-* Allowing
+* Allowing Multiple Guesses with Looping
++ ~loop~ creates an infinite loop
+#+begin_src rust
+// Generate secret number
+println!("The secret number is: {}", secret_number);
+loop {
+    println!("Please input your guess.");
+    // Parse input
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+}
+#+end_src
+** Quitting After a Correct Guess
+#+begin_src rust
+match guess.cmp(&secret_number) {
+    Ordering::Less => println!("Too small!"),
+    Ordering::Greater => println!("Too big!"),
+    Ordering::Equal => {
+        println!("You win!");
+        break;
+    }
+}
+#+end_src
++ ~break~ exits a loop
+** Handling Invalid Input
+Previous:
+#+begin_src rust
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
+#+end_src
+Changed:
+#+begin_src rust
+let guess: u32 = match guess.trim().parse() {
+    Ok(num) =>num,
+    Err(_) => continue,
+};
+#+end_src
++ Using ~match~ instead of ~expect~ allows handling of an =Err= instead of crashing the program
