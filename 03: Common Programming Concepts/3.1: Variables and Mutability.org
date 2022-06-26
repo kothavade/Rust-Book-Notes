@@ -1,0 +1,44 @@
+#+title: 3.1: Variables and Mutability
+#+begin_src rust :exports both
+let x = 5;
+println!("The value of x is: {}", x);
+x = 6;
+println!("The value of x is: {}", x);
+#+end_src
+
+#+RESULTS:
+: error: Could not compile `cargo4vycFL`.
++ Code doesn't compile because variables are immutable by default
+  #+begin_src rust :exports both
+let mut x = 5;
+println!("The value of x is: {}", x);
+x = 6;
+println!("The value of x is: {}", x);
+#+end_src
+
+#+RESULTS:
+: The value of x is: 5
+: The value of x is: 6
++ Adding =mut= makes a variable mutable
++ Mutating is faster than making new copies, but is more complex
+* Constants
++ /constants/ are values that are always immutable
+  + =mut= doesn't work with constants
++ The type of a constant must be annotated
+* Shadowing
++ /shadowing/ is declaring a variable with the same name as an already declare variable
+For example:
+#+begin_src rust :exports both
+let x = 5;
+let x = x + 1;
+{
+    let x = x * 2;
+    println!("The value of x in the inner scope is: {}", x);
+}
+println!("The value of x is: {}", x);
+#+end_src
+
+#+RESULTS:
+: The value of x in the inner scope is: 12
+: The value of x is: 6
++   gg
