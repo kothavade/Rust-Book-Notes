@@ -45,15 +45,16 @@ println!("The value of x is: {}", x);
   + Once the transformations are done, a shadowed variable is immutable
   + Shadowing essentially creates a new variable, because ~let~ is used, so variable type can be changed:
     #+begin_src rust :exports both
-    let mut spaces = "    ";
-    spaces = spaces.len();
+let mut spaces = "    ";
+spaces = spaces.len();
     #+end_src
 
     #+RESULTS:
     : error: Could not compile `cargo4Bjwhm`.
+
     + The type of =spaces= cannot be changed from a =String= to an integer
     #+begin_src rust
-    let spaces = "    ";
-    let spaces = spaces.len();
+let spaces = "    ";
+let spaces = spaces.len();
     #+end_src
     + Shadowing lets this compile, without mutability
