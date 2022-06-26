@@ -1,0 +1,25 @@
+#+title: 3.2: Data Types
++ Every value has a /data type/
++ The type of every value must be known at compile time
+  + This can often be inferred by the compiler
+  + It has to be manually annotated at certain times:
+    #+begin_src rust
+    let guess: u32 = "42".parse().expect("Not a number");
+    #+end_src
+    + The compiler cannot know what type should be parsed without an annotation
+* Scalar Types
++ A /scalar type/ is a single value
++ There are 4 primary scalar types:
+  1. integers
+  2. floating-point numbers
+  3. Booleans
+  4. characters
+** Integer Types
+| Length  | Signed | Unsigned |
+|---------+--------+----------|
+| 8-bit   | i8     | u8       |
+| 16-bit  | i16    | u16      |
+| 32-bit  | i32    | u32      |
+| 64-bit  | i64    | u64      |
+| 128-bit | i128   | u128     |
+| arch    | isize  | usize    |
