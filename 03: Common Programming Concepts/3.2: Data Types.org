@@ -87,12 +87,101 @@ println!("remainder: {}", remainder);
     #+RESULTS:
     : remainder: 3
 ** The Boolean Type
-+ Type: ~bool~
++ Type: =bool=
 + Booleans can be =true= or =false=
-+ One byte in size
++ 1 byte in size
 #+begin_src rust
 let true:bool = true;
 let false = false;
 #+end_src
 ** The Character Type
-+
++ Type: =char=
++ Single character type
++ Specified with single quotes, ='= , instead of double quotes, ="=
++ Can be any Unicode Scalar Value
++ 4 bytes in size
+#+begin_src rust :exports both
+let char = 'z';
+let unicode = '🦀';
+println!("char: {}", char);
+println!("unicode: {}", unicode);
+#+end_src
+
+#+RESULTS:
+: char: z
+: unicode: 🦀
+* Compound Types
+** The Tuple Type
++ Type: ~tup~
++ A way of grouping values of multiple types
++ Fixed length
++ Comma-separated list inside parentheses
+  #+begin_src rust
+  let tup: (u32, bool, f64) = (100, true, 3.2);
+  #+end_src
++ Variables can bind to the entire tuple or to individual values
+  #+begin_src rust :exports both
+  let tup = (500, 6.4, 1);
+  let (x, y, z) = tup;
+  println!("y: {}", y);
+  #+end_src
+  #+RESULTS:
+  : y: 6.4
++ Pattern-matching a tuple to get an individual value is called /destructuring/.
++ Elements inside a tuple can also be accessed with ~.~ syntax:
+  #+begin_src rust
+  let x = (500, 6.4, 1)
+  let five_hundred = x.0;
+  let six_point_4 = x.1;
+  let one = x.2;
+  #+end_src
++ An empty tuple: ~()~, has the type /unit type/ and the value /unit value/
+  + The unit value is returned by an expression that doesn't return anything else
+** The Array Type
++ A way of grouping values of the same type
++ Fixed length
++ Comma-separated list inside square brackets
+  + Specify type and length with ~[type; length]~
+  + An array with the same value can also be initialized with ~[value, length]~
+  #+begin_src rust
+  let arr: [u8; 3] = [1, 2, 3];
+  let same_arr: [3; 5]; //same as: let same_arr = [3, 3, 3, 3, 3]
+  #+end_src
++ Arrays store data on the stack
++ Unlike arrays, vectors can change size
+*** Accessing Array Elements
++ Access elements with indexing
+  #+begin_src rust
+let arr = [1, 2, 3];
+let second_index = arr[2]
+  #+end_src
+*** Invalid Array Element Access
++ Attempting to access an index greater than the length of an array at runtime will cause a runtime error
+#+begin_src rust
+use std::io;
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    println!("Please enter an array index.");
+
+    let mut index = String::new();
+
+    io::stdin()
+        .read_line(&mut index)
+        .expect("Failed to read line");
+
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect("Index entered was not a number");
+
+    let element = a[index];
+
+    println!(
+        "The value of the element at index {} is: {}",
+        index, element
+    );
+}
+#+end_src
+  + Entering a value between 0 and 4 prints the value of the element at that index
+  + Entering a value greater than 4 crashes the program
