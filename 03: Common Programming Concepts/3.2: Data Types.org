@@ -51,8 +51,38 @@
 ** Numeric Operations
 + Supported operations:
   + addition
+    #+begin_src rust :exports both
+let sum = 5 + 10;
+println!("sum: {}", sum);
+    #+end_src
+    #+RESULTS:
+    : sum: 15
   + subtraction
+     #+begin_src rust :exports both
+let difference = 95.5 - 4.3;
+println!("difference: {}", difference);
+    #+end_src
+    #+RESULTS:
+    : difference: 91.2
   + multiplication
+    #+begin_src rust :exports both
+let product = 4* 30;
+println!("product: {}", product);
+    #+end_src
   + division
+    #+begin_src rust :exports both
+let quotient = 56.7 / 32.2;
+println!("quotient: {}", quotient);
+let floored = 2 / 3;
+println!("floored: {}", floored);
+    #+end_src
+    #+RESULTS:
+    : quotient: 1.7608695652173911
+    : floored: 0
   + remainder
-+
+    #+begin_src rust :exports both
+let remainder = 43 % 5;
+println!("remainder: {}", remainder);
+    #+end_src
+    #+RESULTS:
+    : remainder: 3
