@@ -52,7 +52,7 @@
 + Supported operations:
   + addition
     #+begin_src rust :exports both
-let sum = 5 + 10;
+let sum = 7 + 10;
 println!("sum: {}", sum);
     #+end_src
     #+RESULTS:
@@ -86,3 +86,13 @@ println!("remainder: {}", remainder);
     #+end_src
     #+RESULTS:
     : remainder: 3
+** The Boolean Type
++ Type: ~bool~
++ Booleans can be =true= or =false=
++ One byte in size
+#+begin_src rust
+let true:bool = true;
+let false = false;
+#+end_src
+** The Character Type
++
