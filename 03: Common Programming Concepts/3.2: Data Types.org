@@ -23,3 +23,36 @@
 | 64-bit  | i64    | u64      |
 | 128-bit | i128   | u128     |
 | arch    | isize  | usize    |
++ /Signed/ variables can be negative whereas /unsigned/ can only be positive
++ Signed numbers can store numbers from -(2^{n-1}) to 2^{n-1}-1
++ Unsigned variables can store numbers from 0 to 2^{n}-1
++ arch variables (=isize=, =usize=) are the size of the system architecture
++ If unsure, =i32= and =u32= good choices
+*** Integer Overflow
++ /Integer overflow/ is when a value outside of the range a variable can hold is attempted to be stored inside it
+  + For example, a =u8= can store from 0 to 255, so attempting to store 300 in it will cause integer overflow
++ Integer overflow causes a /panic/ at runtime if in *debug* mode
++ In *release* mode, /two's complement wrapping/ is performed, which means that values over the maximum will start from the minimum
+  + For example, in a =u8=, the value 256 becomes 0, the value 257 becomes 1, etc.
++ Integer overflow can be explicitly handled
+  + Wrapping can be done with the ~wrapping_*~ methods, such as ~wrapping_add~
+  + Return =None= if overflow occurs with the ~checked_*~ methods
+  + Return a value and a boolean indicating overflow with the ~overflowing_*~ methods
+  + Saturate at the value's min/max with the ~saturating_*~ methods
+** Floating-Point Types
++ /Floating-point/ numbers are numbers with decimals
+| Length | Name |
+|--------+------|
+| 32-bit | f32  |
+| 64-bit | f64  |
++ They are represented according to the IEEE-754 standart
+  + =f32= types are single-precision
+  + =f64= types are double precision
+** Numeric Operations
++ Supported operations:
+  + addition
+  + subtraction
+  + multiplication
+  + division
+  + remainder
++
