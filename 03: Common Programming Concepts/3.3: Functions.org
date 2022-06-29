@@ -1,0 +1,13 @@
+#+title: 3.3: Functions
++ ~main~ is the entry point of a program
++ ~fn~ declares new functions
++ Functions are named in /snake case/
+  #+begin_src rust :exports both
+a_function_name();
+fn a_function_name() {
+    println!("Hello, world!");
+}
+  #+end_src
+  #+RESULTS:
+  : Hello, world!
++ Functions can be defined anywhere in a file
