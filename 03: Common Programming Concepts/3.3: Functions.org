@@ -1,13 +1,61 @@
 #+title: 3.3: Functions
-+ ~main~ is the entry point of a program
-+ ~fn~ declares new functions
++ =main= is the entry point of a program
++ =fn= declares new functions
 + Functions are named in /snake case/
   #+begin_src rust :exports both
-a_function_name();
 fn a_function_name() {
     println!("Hello, world!");
 }
-  #+end_src
-  #+RESULTS:
-  : Hello, world!
 + Functions can be defined anywhere in a file
+* Parameters
++ /Parameters/, or /arguments/, are the variables that are passed into a function
+#+begin_src rust
+parameter_function(3);
+fn parameter_function(x: i32) {
+    println!("The parameter is: {x}");
+}
+#+end_src
+#+RESULTS:
+: The parameter is: 3
++ Functions with multiple parameters separate the parameters with commas
+#+begin_src rust
+multiple_parameter_function(5, 'c');
+fn multiple_parameter_function(num: i32, label: char) {
+    println!("{label}{num}");
+}
+#+end_src
+#+RESULTS:
+: c5
+* Statements and Expressions
++ Functions are made of a series of /statements/, which are instructions which do not return a value
+#+begin_src rust
+let x = 3; // a statement
+#+end_src
++ Functions can optionally end with an /expression/, which evaluate to a value
+#+begin_src rust :exports both
+let y = {
+    let x = 3;
+    x + 1 // an expression
+};
+println!("y: {y}");
+#+end_src
+#+RESULTS:
+: y: 4
+* Functions with Return Values
++ The type of a function's return value is declared with an arrow, =->=
++ The last expression is returned implicitly
+  + No semicolon
+#+begin_src rust
+fn five() -> u8 {
+    5
+}
+#+end_src
++ =return= can return a value early
+#+begin_src rust
+fn is_five(num: usize) -> bool {
+    if num == 5 {
+        return true;
+    }
+    false
+}
+#+end_src
