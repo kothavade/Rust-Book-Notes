@@ -1,0 +1,11 @@
+#+title: 3.4: Comments
++ Comments are ignored by the compiler
++ Comment with =//=
+#+begin_src rust
+// a comment
+
+// a multiline
+// comment
+
+let x = 5; // x is 5
+#+end_src
